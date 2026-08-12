@@ -4,6 +4,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.141'
+    id "me.modmuss50.mod-publish-plugin" version "2.1.1"
 }
 
 version = mod_version
@@ -155,4 +156,28 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+publishMods {
+    file = tasks.named("jar").get().archiveFile
+    changelog = rootProject.file("CHANGELOG-LATEST.md").exists() ? rootProject.file("CHANGELOG-LATEST.md").text : ""
+    type = STABLE
+
+    version = project.version
+    displayName = "Oooh Pinky ${project.version}"
+    modLoaders.add("neoforge")
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        projectId = "1649140"
+        minecraftVersions.add(project.minecraft_version)
+        client = true
+        server = true
+    }
+
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectId = "7Ziq3fri"
+        minecraftVersions.add(project.minecraft_version)
+    }
 }
