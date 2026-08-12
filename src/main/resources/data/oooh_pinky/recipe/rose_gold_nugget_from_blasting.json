@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "oooh_pinky:recycling"
+    }
+  ],
+  "result": {
+    "id": "oooh_pinky:rose_gold_nugget"
+  },
+  "experience": 0.1,
+  "cookingtime": 100,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "oooh_pinky:recycling"
+      }
+    }
+  ]
+}

@@ -3,9 +3,7 @@ package com.jerrylu086.oooh_pinky.registry;
 import com.jerrylu086.oooh_pinky.OoohPinky;
 import com.jerrylu086.oooh_pinky.items.PiglinNeutralArmor;
 import com.jerrylu086.oooh_pinky.items.SimpleBarterItem;
-import com.jerrylu086.oooh_pinky.items.tiers.ModArmorMaterial;
 import com.jerrylu086.oooh_pinky.items.tiers.ModItemTier;
-
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -26,55 +24,55 @@ public class ModItems {
 
     // Tools & armor
     public static final DeferredItem<SwordItem> ROSE_GOLD_SWORD = ITEMS.register("rose_gold_sword",
-            () -> new SwordItem(ModItemTier.ROSE_GOLD, 3, -2.2F,
-                    new Item.Properties()));
+            () -> new SwordItem(ModItemTier.ROSE_GOLD,
+                    new Item.Properties().attributes(SwordItem.createAttributes(ModItemTier.ROSE_GOLD, 3.0F, -2.2F))));
     public static final DeferredItem<ShovelItem> ROSE_GOLD_SHOVEL = ITEMS.register("rose_gold_shovel",
-            () -> new ShovelItem(ModItemTier.ROSE_GOLD, 1.5F, -3.0F,
-                    new Item.Properties()));
+            () -> new ShovelItem(ModItemTier.ROSE_GOLD,
+                    new Item.Properties().attributes(DiggerItem.createAttributes(ModItemTier.ROSE_GOLD, 1.5F, -3.0F))));
     public static final DeferredItem<PickaxeItem> ROSE_GOLD_PICKAXE = ITEMS.register("rose_gold_pickaxe",
-            () -> new PickaxeItem(ModItemTier.ROSE_GOLD, 1, -2.8F,
-                    new Item.Properties()));
+            () -> new PickaxeItem(ModItemTier.ROSE_GOLD,
+                    new Item.Properties().attributes(DiggerItem.createAttributes(ModItemTier.ROSE_GOLD, 1.0F, -2.8F))));
     public static final DeferredItem<AxeItem> ROSE_GOLD_AXE = ITEMS.register("rose_gold_axe",
-            () -> new AxeItem(ModItemTier.ROSE_GOLD, 6.0F, -3.1F,
-                    new Item.Properties()));
+            () -> new AxeItem(ModItemTier.ROSE_GOLD,
+                    new Item.Properties().attributes(DiggerItem.createAttributes(ModItemTier.ROSE_GOLD, 6.0F, -3.1F))));
     public static final DeferredItem<HoeItem> ROSE_GOLD_HOE = ITEMS.register("rose_gold_hoe",
-            () -> new HoeItem(ModItemTier.ROSE_GOLD,-2, -1,
-                    new Item.Properties()));
+            () -> new HoeItem(ModItemTier.ROSE_GOLD,
+                    new Item.Properties().attributes(DiggerItem.createAttributes(ModItemTier.ROSE_GOLD, -2.0F, -1.0F))));
 
     public static final DeferredItem<Item> ROSE_GOLD_HELMET = ITEMS.register("rose_gold_helmet",
-            () -> new PiglinNeutralArmor(ModArmorMaterial.ROSE_GOLD, ArmorItem.Type.HELMET,
-                    new Item.Properties()));
+            () -> new PiglinNeutralArmor(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(21))));
     public static final DeferredItem<Item> ROSE_GOLD_CHESTPLATE = ITEMS.register("rose_gold_chestplate",
-            () -> new PiglinNeutralArmor(ModArmorMaterial.ROSE_GOLD, ArmorItem.Type.CHESTPLATE,
-                    new Item.Properties()));
+            () -> new PiglinNeutralArmor(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(21))));
     public static final DeferredItem<Item> ROSE_GOLD_LEGGINGS = ITEMS.register("rose_gold_leggings",
-            () -> new PiglinNeutralArmor(ModArmorMaterial.ROSE_GOLD, ArmorItem.Type.LEGGINGS,
-                    new Item.Properties()));
+            () -> new PiglinNeutralArmor(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(21))));
     public static final DeferredItem<Item> ROSE_GOLD_BOOTS = ITEMS.register("rose_gold_boots",
-            () -> new PiglinNeutralArmor(ModArmorMaterial.ROSE_GOLD, ArmorItem.Type.BOOTS,
-                    new Item.Properties()));
+            () -> new PiglinNeutralArmor(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(21))));
 
     public static void addToTabs(BuildCreativeModeTabContentsEvent event) {
         // Man this is soo freaking long
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.getEntries().putAfter(new ItemStack(Items.GOLD_BLOCK), new ItemStack(ROSE_GOLD_BLOCK.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLD_BLOCK), new ItemStack(ROSE_GOLD_BLOCK.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_HOE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_AXE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_SHOVEL.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_PICKAXE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_HOE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_AXE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_SHOVEL.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_HOE), new ItemStack(ROSE_GOLD_PICKAXE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_SWORD), new ItemStack(ROSE_GOLD_SWORD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_BOOTS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_LEGGINGS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_CHESTPLATE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_HELMET.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_SWORD), new ItemStack(ROSE_GOLD_SWORD.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_BOOTS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_LEGGINGS.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_CHESTPLATE.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLDEN_BOOTS), new ItemStack(ROSE_GOLD_HELMET.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.getEntries().putAfter(new ItemStack(Items.GOLD_NUGGET), new ItemStack(ROSE_GOLD_NUGGET.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(new ItemStack(Items.GOLD_INGOT), new ItemStack(ROSE_GOLD_INGOT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLD_NUGGET), new ItemStack(ROSE_GOLD_NUGGET.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(new ItemStack(Items.GOLD_INGOT), new ItemStack(ROSE_GOLD_INGOT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 }

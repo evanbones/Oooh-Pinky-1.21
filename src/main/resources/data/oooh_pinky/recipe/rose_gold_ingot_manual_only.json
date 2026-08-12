@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:ingots/copper"
+    },
+    {
+      "tag": "c:ingots/gold"
+    },
+    {
+      "tag": "c:ingots/gold"
+    },
+    {
+      "tag": "c:ingots/gold"
+    }
+  ],
+  "result": {
+    "id": "oooh_pinky:rose_gold_ingot",
+    "count": 2
+  },
+  "neoforge:conditions": [
+    {
+      "type": "oooh_pinky:easy_crafting"
+    }
+  ]
+}

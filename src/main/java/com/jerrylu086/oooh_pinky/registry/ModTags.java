@@ -8,5 +8,5 @@ import net.minecraft.world.item.Item;
 public class ModTags {
     // Item
     public static final TagKey<Item> ROSE_GOLD_INGOT =
-            TagKey.create(Registries.ITEM, new ResourceLocation("forge", "ingots/rose_gold"));
+            TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/rose_gold"));
 }

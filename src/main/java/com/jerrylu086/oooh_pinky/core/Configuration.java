@@ -1,6 +1,6 @@
 package com.jerrylu086.oooh_pinky.core;
 
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -9,7 +9,7 @@ public class Configuration {
     public static ModConfigSpec.BooleanValue EASY_CRAFTING;
     public static ModConfigSpec.BooleanValue ROSE_GOLD_BARTERING;
 
-    public static void init() {
+    public static void init(ModContainer modContainer) {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
         EASY_CRAFTING =
@@ -20,6 +20,6 @@ public class Configuration {
                 .define("roseGoldBartering", true);
         COMMON = builder.build();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON);
+        modContainer.registerConfig(ModConfig.Type.COMMON, COMMON);
     }
 }

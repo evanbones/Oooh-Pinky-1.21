@@ -3,6 +3,9 @@ package com.jerrylu086.oooh_pinky.mixin;
 import com.jerrylu086.oooh_pinky.OoohPinky;
 import com.jerrylu086.oooh_pinky.core.Configuration;
 import com.jerrylu086.oooh_pinky.registry.ModTags;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -18,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.List;
 
@@ -28,7 +30,8 @@ import java.util.List;
 @Mixin(PiglinAi.class)
 public abstract class PiglinAiMixin {
     @Unique
-    private static final ResourceLocation ROSE_GOLD_BARTERING_PATH = new ResourceLocation(OoohPinky.MOD_ID, "gameplay/rose_gold_bartering");
+    private static final ResourceKey<LootTable> ROSE_GOLD_BARTERING_KEY = ResourceKey.create(Registries.LOOT_TABLE,
+            ResourceLocation.fromNamespaceAndPath(OoohPinky.MOD_ID, "gameplay/rose_gold_bartering"));
     @Unique
     private static final String SPECIAL_BARTER_DATA_KEY = OoohPinky.MOD_ID + ":special_barter";
 
@@ -45,20 +48,20 @@ public abstract class PiglinAiMixin {
     }
 
     @Inject(method = "stopHoldingOffHandItem",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;"),
-            locals = LocalCapture.CAPTURE_FAILHARD)
-    private static void setBarterItem(Piglin piglin, boolean doBarter, CallbackInfo ci, ItemStack held, boolean accepted) {
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/piglin/PiglinAi;getBarterResponseItems(Lnet/minecraft/world/entity/monster/piglin/Piglin;)Ljava/util/List;")
+    )
+    private static void setBarterItem(Piglin piglin, boolean doBarter, CallbackInfo ci, @Local ItemStack held) {
         // Well, I'll leave this here, since Forge requires overriding a method to add new barter items,
         // and...guess none of the existing mods with rose gold does that.
         if (held.is(ModTags.ROSE_GOLD_INGOT))
             piglin.getPersistentData().putBoolean(SPECIAL_BARTER_DATA_KEY, true);
     }
 
-    @Inject(method = "getBarterResponseItems", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
-    private static void getBarterResponseItems(Piglin piglin, CallbackInfoReturnable<List<ItemStack>> cir, LootTable loots) {
+    @Inject(method = "getBarterResponseItems", at = @At(value = "RETURN"), cancellable = true)
+    private static void getBarterResponseItems(Piglin piglin, CallbackInfoReturnable<List<ItemStack>> cir) {
         // This looks so weird
         if (piglin.getPersistentData().getBoolean(SPECIAL_BARTER_DATA_KEY))
-            cir.setReturnValue(piglin.level().getServer().getLootData().getLootTable(ROSE_GOLD_BARTERING_PATH)
+            cir.setReturnValue(piglin.level().getServer().reloadableRegistries().getLootTable(ROSE_GOLD_BARTERING_KEY)
                     .getRandomItems((new LootParams.Builder((ServerLevel) piglin.level()))
                             .withParameter(LootContextParams.THIS_ENTITY, piglin)
                             .create(LootContextParamSets.PIGLIN_BARTER)));
