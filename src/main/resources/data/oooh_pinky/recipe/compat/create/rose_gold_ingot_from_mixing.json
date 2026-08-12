@@ -1,5 +1,6 @@
 {
   "type": "create:mixing",
+  "heat_requirement": "heated",
   "ingredients": [
     {
       "tag": "c:ingots/copper"
@@ -16,11 +17,10 @@
   ],
   "results": [
     {
-      "item": "oooh_pinky:rose_gold_ingot",
-      "count": 4
+      "count": 4,
+      "id": "oooh_pinky:rose_gold_ingot"
     }
   ],
-  "heatRequirement": "heated",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
