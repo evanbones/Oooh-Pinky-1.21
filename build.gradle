@@ -11,7 +11,67 @@ group = mod_group_id
 base.archivesName = 'oooh_pinky-neoforge'
 
 repositories {
-    mavenLocal()
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
+        }
+        filter {
+            includeGroup("com.terraformersmc")
+            includeGroup("dev.emi")
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "cassian's maven"
+                url = "https://maven.cassian.cc/"
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("cc.cassian")
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = "https://repo.sleeping.town/"
+            }
+        }
+        filter {
+            includeGroup "folk.sisby"
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = "https://maven.isxander.dev/releases"
+                name = "Xander Maven"
+            }
+        }
+        filter {
+            includeGroupAndSubgroups("org.quiltmc.parsers")
+        }
+    }
+
+    mavenCentral()
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -62,6 +122,7 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    runtimeOnly "maven.modrinth:emi:1.1.22+1.21.1+neoforge"
 }
 
 tasks.withType(ProcessResources).configureEach {
