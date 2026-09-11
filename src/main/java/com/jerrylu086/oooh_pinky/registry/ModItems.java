@@ -1,10 +1,12 @@
 package com.jerrylu086.oooh_pinky.registry;
 
 import com.jerrylu086.oooh_pinky.OoohPinky;
+import com.jerrylu086.oooh_pinky.compat.farmersdelight.FDCompat;
 import com.jerrylu086.oooh_pinky.items.PiglinNeutralArmor;
 import com.jerrylu086.oooh_pinky.items.SimpleBarterItem;
 import com.jerrylu086.oooh_pinky.items.tiers.ModItemTier;
 import net.minecraft.world.item.*;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -73,6 +75,9 @@ public class ModItems {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.insertAfter(new ItemStack(Items.GOLD_NUGGET), new ItemStack(ROSE_GOLD_NUGGET.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(new ItemStack(Items.GOLD_INGOT), new ItemStack(ROSE_GOLD_INGOT.get()), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+        if (ModList.get().isLoaded("farmersdelight")) {
+            FDCompat.addToFDTab(event);
         }
     }
 }

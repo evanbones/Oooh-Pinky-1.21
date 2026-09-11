@@ -124,6 +124,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     runtimeOnly "maven.modrinth:emi:1.1.22+1.21.1+neoforge"
+    implementation "maven.modrinth:farmers-delight:1.21.1-1.3.4"
 }
 
 tasks.withType(ProcessResources).configureEach {

@@ -12,6 +12,10 @@
     "oooh_pinky:rose_gold_helmet",
     "oooh_pinky:rose_gold_chestplate",
     "oooh_pinky:rose_gold_leggings",
-    "oooh_pinky:rose_gold_boots"
+    "oooh_pinky:rose_gold_boots",
+    {
+      "id": "oooh_pinky:rose_gold_knife",
+      "required": false
+    }
   ]
 }
